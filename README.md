@@ -48,24 +48,22 @@ You will need to build the following 2 pages with React:
 - When the UI is in a loading state render a skeleton. ([program-loading.jpg](./program-loading.jpg)).
 - When an error occurs an error message message should be rendered. ([error.jpg](./error.jpg))
 
-## Other Notes
+## SetUp Instructions
+The Project is built React, Typescript and styled components.
 
-Please also include a `README` with setup instructions, and any tests or other documentation you created as part of your solution.
+- You will need to first install the dependencies via `yarn install`.
+- Post the installation, start the application via `yarn start`.
+- To execute the tests run `yarn test`
 
-Also, add the following info to your `README`:
-
-- How did you decide on the technical and architectural choices used as part of your solution?
-- Are there any improvements you could make to your submission?
-- What would you do differently if you were allocated more time?
-
-Please also send through any other code or projects that you're proud of and would like to share with us.
-
-Any feedback on the coding challenge once you're done is also appreciated!
-
-### SetUp Instructions
-The Project is built React and typescript and styled component.
-you need to first install the dependencies via `yarn install`.
-Post the dependencies installation, you can start the application via `yarn start`
-To execute the tests run `yarn test`
-
-
+Folder Structure:
+The project uses the following folder structure
+- src
+  - components `(Reusable components)`
+    - App.tsx
+    - Header.tsx
+    - ImageCarousel.tsx
+  - pages `(components based on the routes)`
+    - Details
+    - Home
+  - styles `(global styles are defined here)`
+  - typings `(custom types are defined here)`
