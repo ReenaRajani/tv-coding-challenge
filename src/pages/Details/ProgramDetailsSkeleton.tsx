@@ -40,7 +40,7 @@ const SynopsisSkeleton = styled.p`
 
 const ProgramDetailsSkeleton = () => {
   return(
-    <ProgramDetailsContainer>
+    <ProgramDetailsContainer data-testid="skeleton">
       <ProgramImageSkeleton></ProgramImageSkeleton>
       <ProgramInformation>
        <ProgramTitleSkeleton></ProgramTitleSkeleton>

@@ -17,6 +17,7 @@ module.exports = {
     port: '3000',
     open: true,
     liveReload: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -38,6 +39,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ 
       template: path.join(__dirname, "src", "index.html"),
+      publicPath: '/',
     })
   ],
 }

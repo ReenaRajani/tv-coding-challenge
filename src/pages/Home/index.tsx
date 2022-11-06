@@ -3,18 +3,22 @@ import styled from "styled-components";
 import HomeSkeleton from "./HomeSkeleton";
 import ImageCarousel from "../../components/ImageCarousel";
 
-const ErrorDiv = styled.div`
+const ErrorContainer = styled.div`
   margin-top: 2em;
   font-weight: 600;
   color: #606060;
+  font-size: 1.5em;
 `;
 
+const ERROR_MESSAGE = 'An unknown error occured. Please try again later';
 const Home = () => {
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [programData, setProgramData] = useState(null);
   const MAX_IMAGES = 6;
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async() => {
       try {
         const response = await fetch('./data.json', {
@@ -23,8 +27,7 @@ const Home = () => {
             'Accept': 'application/json'
         }});
         if(!response.ok){
-          setError(true);
-          throw new Error('An unknown error occured. Please try again later');
+          throw new Error(ERROR_MESSAGE);
         }
         let jsonData = await response.json();
         setProgramData(jsonData);
@@ -32,19 +35,23 @@ const Home = () => {
       } catch(error){
         setError(error.message);
         setProgramData(null);
+      } finally {
+        setLoading(false);
       }
-    }
-    fetchData();
-    console.log('--> data, error inside', programData, error )
+    };
+    const timer = setTimeout(() => {
+      setLoading(false);
+      fetchData();
+    }, 2000);
+    return(() => clearTimeout(timer));
   }, []);
-  console.log('--> data, error ', programData, error )
   return (
   <div className="home-page-content">
-    {error && (<ErrorDiv className="error-container" data-testId="error-container">{error}</ErrorDiv>)}
-    {programData && programData.length > 0 ?
+    {loading && <HomeSkeleton />}
+    {error && (<ErrorContainer  data-testid="error-container">{error}</ErrorContainer>)}
+    {programData && !error && (
       <ImageCarousel slides={programData} show={MAX_IMAGES}></ImageCarousel>
-      : <HomeSkeleton />
-    }
+    )}
   </div>
   );
 };

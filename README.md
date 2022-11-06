@@ -62,5 +62,10 @@ Please also send through any other code or projects that you're proud of and wou
 
 Any feedback on the coding challenge once you're done is also appreciated!
 
+### SetUp Instructions
+The Project is built React and typescript and styled component.
+you need to first install the dependencies via `yarn install`.
+Post the dependencies installation, you can start the application via `yarn start`
+To execute the tests run `yarn test`
 
-###
+

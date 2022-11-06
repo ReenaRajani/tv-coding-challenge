@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const MainLogo: string = require("../../logo.svg").default;
-
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -48,15 +46,15 @@ const NavLink = styled(Link)`
 const Header = () => {
   return (
     <HeaderWrapper>
-      <Logo src={MainLogo} alt="Stan Logo" />
+      <Logo src={'/assets/logo.svg'} alt="Stan Logo" />
         <NavList role="navigation">
-          <NavItem>
+          <NavItem aria-labelledby="nav-link">
             <NavLink className="selected" to="/">Home</NavLink>
           </NavItem>
-          <NavItem>
+          <NavItem aria-labelledby="nav-link">
             <NavLink to="#">TV Shows</NavLink>
           </NavItem>
-          <NavItem>
+          <NavItem aria-labelledby="nav-link">
             <NavLink to="#">Movies</NavLink>
           </NavItem>
         </NavList>

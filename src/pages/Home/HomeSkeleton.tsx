@@ -17,7 +17,7 @@ const CarouselSkeltonItem = styled.div`
 const HomeSkeleton = () => {
   const MINIMUM_ITEMS = 6;
   return(
-    <CarouselSkeletonContainer className="Carousel-skeleton">
+    <CarouselSkeletonContainer data-testid="carousel-skeleton">
      {[...Array(MINIMUM_ITEMS)].map((element, index) => <CarouselSkeltonItem key={index} />)}
     </CarouselSkeletonContainer>
   );

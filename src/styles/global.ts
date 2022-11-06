@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 // convert pixels to viewport width
-const px2vw = (size, width = 1440) => `${(size / width) * 100}vw`;
+const px2vw = (size: number, width = 1440) => `${(size / width) * 100}vw`;
 
 const GlobalStyle = createGlobalStyle`
   * {

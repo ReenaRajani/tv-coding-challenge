@@ -74,7 +74,6 @@ const ProgramDetails = (props: ProgramProps) => {
   const { data } = location.state;
   const [loading, setLoading] = useState(false);
 
-  // Just to show how the loading screen works
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => {
@@ -87,17 +86,17 @@ const ProgramDetails = (props: ProgramProps) => {
     <div>
        {loading ? 
        <ProgramDetailsSkeleton /> :
-       <ProgramDetailsContainer>
-        <ProgramImage src={data.image} className="skeleton"></ProgramImage>
+       <ProgramDetailsContainer data-testid="program-container">
+        <ProgramImage src={data.image} alt={data.title}></ProgramImage>
         <ProgramInformation>
-          <ProgramTitle className="skeleton"> {data.title}</ProgramTitle>
-            <MetaData className="skeleton">
+          <ProgramTitle> {data.title}</ProgramTitle>
+            <MetaData>
               <MetaFeature> {data.rating} </MetaFeature>
               <MetaFeature>{data.year}</MetaFeature>
               <MetaFeature> {data.genre} </MetaFeature>
               <MetaFeature> {data.language} </MetaFeature>
             </MetaData>
-          <Synopsis className="skeleton">
+          <Synopsis>
             {data.description}
           </Synopsis>
         </ProgramInformation>

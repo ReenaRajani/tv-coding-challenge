@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 import {
   Routes,
@@ -7,7 +7,7 @@ import {
 
 import Header from './Header';
 import ProgramDetails from "../pages/Details/ProgramDetails";
-import Home from '../pages/Home';
+import Home from '../pages/Home/index';
 
 import GlobalStyle from "../styles/global";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -120,8 +120,6 @@ const ImageCarousel = (props: CarouselProps) => {
   let navigate = useNavigate();
   const [start, setStart] = useState(0);
   const [finish, setFinish] = useState(show);
-  
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesLength, setSlidesLength] = useState(slides.length);
 
   useEffect(() => {
@@ -129,9 +127,6 @@ const ImageCarousel = (props: CarouselProps) => {
   },[slides, show]);
 
   const moveNext = () => {
-    if(currentIndex < (slidesLength - show)){
-      setCurrentIndex(prevState => prevState + 1);
-    }
     if(finish < slidesLength){
       setStart(start + show);
       setFinish(finish + show);
@@ -139,33 +134,34 @@ const ImageCarousel = (props: CarouselProps) => {
   }
 
   const movePrevious = () => {
-    if (currentIndex > 0){
-      setCurrentIndex(prevState => prevState - 1)
-    }
-    if(finish < slidesLength){
+    if(finish < slidesLength && start > 0){
       setStart(start - show);
       setFinish(finish - show);
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  function handleKeyDownListener(event: KeyboardEvent){
     if (event.key === 'ArrowLeft') {
       movePrevious();
-
-    } else if (event.key === 'ArrowRight') {
+    } else if (event.key=== 'ArrowRight') {
       moveNext();
     }
-  };
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      handleKeyDownListener(event)
+    }, false);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDownListener);
+    }
+  },[start, finish]);
 
   return (
-    <CarouselContainer className="carousel-container">
-      <CarouselWrapper className="carousel-wrapper">
-        {currentIndex > 0 && <LeftButton onClick={movePrevious}> &lt;</LeftButton>}
+    <CarouselContainer>
+      <CarouselWrapper>
         <CarouselContentWrapper>
-          <CarouselContent className={`show-${show}`}
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-            >
+          <CarouselContent className={`show-${show}`}>
               {slides.slice(start, finish).map((slide, imgindex)=>(
                   <CarouselImage
                     key={imgindex}
@@ -181,9 +177,6 @@ const ImageCarousel = (props: CarouselProps) => {
               ))}
           </CarouselContent>
         </CarouselContentWrapper>
-        {currentIndex < (slidesLength - show) &&
-          <RightButton onClick={moveNext}> &gt;</RightButton>
-        }
       </CarouselWrapper> 
     </CarouselContainer>
   );
